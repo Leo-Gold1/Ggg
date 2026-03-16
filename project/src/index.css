@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.spoiler {
+  color: transparent;
+  user-select: none;
+}
+
+.spoiler:hover {
+  color: inherit;
+  user-select: text;
+}

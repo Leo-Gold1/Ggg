@@ -1,0 +1,33 @@
+entrypoint = "project/package.json"
+modules = ["nodejs-22"]
+hidden = [".config", "package-lock.json"]
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "project/package.json"]
+
+[nix]
+channel = "stable-24_11"
+packages = ["nodejs_22", "npm"]
+
+[deployment]
+run = ["sh", "-c", "cd project && npm install && npm run preview -- --host 0.0.0.0 --port 3000"]
+deploymentTarget = "autoscale"
+ignorePorts = false
+
+[workflows]
+runButton = "Dev Server"
+
+[[workflows.workflow]]
+name = "Dev Server"
+author = "replit"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd project && npm install && npm run dev -- --host 0.0.0.0 --port 3000"
+
+[agent]
+expertMode = true
+
+[[ports]]
+localPort = 3000
+externalPort = 80
